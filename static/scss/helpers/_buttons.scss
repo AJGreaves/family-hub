@@ -1,0 +1,153 @@
+/* ------------------------------
+    Buttons
+------------------------------ */
+
+button:disabled {
+    background-color: #926b65;
+    border: 1px solid  #926b65;
+}
+
+button:disabled:hover {
+    background-color: #746d6c;
+    border: 1px solid #746d6c;
+}
+
+.btn {
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.btn-readmore {
+    background-color: $mid-blue;
+    border: 1px solid $mid-blue;
+    color: #fff;
+    -webkit-transition: all 0.3s ease-in-out 0.3s;
+    transition: all 0.3s ease-in-out 0.3s;
+}
+
+.btn-readmore:hover {
+    background-color: $mid-blue-hover;
+    border: 1px solid $mid-blue-hover;
+    color: #fff;
+}
+
+.btn-search {
+    color: #fff;
+    background-color: $terracotta;
+    border: 1px solid $terracotta;
+    -webkit-transition: all 0.3s ease-in-out 0.3s;
+    transition: all 0.3s ease-in-out 0.3s;
+}
+
+/* changes default btn outline to one that matches this buttons custom colour */
+.btn-search:focus {
+    -webkit-box-shadow: 0 0 0 .2rem rgba(237, 106, 90,.25);
+            box-shadow: 0 0 0 .2rem rgba(237, 106, 90,.25);
+}
+
+.btn-search:hover {
+    background-color: $terracotta-hover;
+    border: 1px solid $terracotta-hover;
+    color: #fff;
+}
+
+.btn-create {
+    background-color: $green;
+    border: 1px solid $green;
+    color: #fff;
+    -webkit-transition: all 0.3s ease-in-out 0.3s;
+    transition: all 0.3s ease-in-out 0.3s;
+}
+
+.btn-create:hover {
+    background-color: $green-hover;
+    border: 1px solid $green-hover;
+    color: #fff;
+}
+
+.btn-create:focus {
+    -webkit-box-shadow: 0 0 0 .2rem rgba(148, 182, 89,.25);
+            box-shadow: 0 0 0 .2rem rgba(148, 182, 89,.25);
+}
+
+.btn-delete {
+    background-color: $red;
+    border: 1px solid $red;
+    color: #fff;
+    -webkit-transition: all 0.3s ease-in-out 0.3s;
+    transition: all 0.3s ease-in-out 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: $red-hover;
+    border: 1px solid $red-hover;
+    color: #fff;
+}
+
+.btn-delete:focus {
+    -webkit-box-shadow: 0 0 0 .2rem rgba(220, 53, 69,.25);
+            box-shadow: 0 0 0 .2rem rgba(220, 53, 69,.25);
+}
+
+.btn-delete.no-click {
+    background-color: #72585a;
+}
+
+.icon-circle {
+    height: 48px;
+    width: 48px;
+    background-color: $dark-blue;
+    border-radius: 50%;
+    position: relative;
+}
+
+.search-input-field,
+#publish {
+    display: inline;
+}
+
+#search-page-search-button {
+    margin-bottom: 4px;
+    margin-top: 1rem;
+}
+
+.heading-btn {
+    margin-top: 2.7rem;
+}
+
+#listing-contact-links a {
+    width: 150px;
+    margin: 0.5rem 0;
+}
+
+/* credit: code for floating buttons taken from https://www.w3schools.com/howto/howto_js_scroll_to_top.asp 
+and edited slightly to fit project needs */
+
+#to-top-btn {
+    position: fixed;
+    bottom: 15px;
+    right: 5px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: $terracotta;
+    opacity: 0;
+    background-color: transparent;
+    -webkit-transition: all 0.5s ease-in-out 0.2s;
+    transition: all 0.5s ease-in-out 0.2s;
+}
+
+#to-top-btn.active {
+    pointer-events: auto;
+    opacity: 0.5;
+}
+
+#to-top-btn.active:hover {
+    opacity: 1;
+}
+
+/* overrides timepicker border css from gijgo css that did not match datepicker */
+.btn-outline-secondary {
+    border: 1px solid #ced4da;
+}

@@ -1,0 +1,93 @@
+/* ------------------------------
+    Carousels
+------------------------------ */
+
+/* works with js to slow carousels down. 
+Credit: https://stackoverflow.com/questions/17332431/how-can-i-control-the-speed-that-bootstrap-carousel-slides-in-items/18633703 */
+.carousel-inner .carousel-item {
+    transition: -webkit-transform 2s ease;
+    -webkit-transition: -webkit-transform 2s ease;
+    transition: transform 2s ease;
+    transition: transform 2s ease, -webkit-transform 2s ease;
+}
+
+.carousel-indicators {
+    position: relative;
+}
+
+.carousel-indicators li {
+    background-color: $mid-blue;
+}
+
+.carousel-indicators li.active {
+    background-color: $mid-blue-hover;
+}
+
+/* ------------------------------
+    Modals
+------------------------------ */
+
+#search-modal,
+#delete-warning-modal,
+#newUserConfirmModal,
+#userExistsModal,
+#loggedInModal,
+#alertModal {
+    height: 100vh;
+    z-index: 2000;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    /* makes modal background darker but still has transparency 
+    stops content inside this element also being transparent, 
+    which was what was happening when using opacity */
+    background-color: rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    -webkit-transition: all 0.5s ease-in-out 0.2s;
+    transition: all 0.5s ease-in-out 0.2s;
+}
+
+#search-modal.active,
+#delete-warning-modal.active,
+#newUserConfirmModal.active,
+#userExistsModal.active,
+#loggedInModal.active,
+#alertModal.active {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.modal-content-box {
+    max-width: 550px;
+    min-height: 300px;
+    margin-top: 10vh;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid black;
+    /* Credit: code for box shadow taken from https://codepen.io/sdthornton/pen/wBZdXq */
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+#emailActivityModal .modal-content-box {
+    margin-top: 60px;
+}
+
+#delete-warning-modal h3,
+#userExistsModal h3 {
+    font-family: $capitalized-heading;
+    color: $terracotta;
+    text-align: center;
+}
+
+#delete-warning-modal p {
+    font-size: 1.5rem;
+    color: $terracotta-hover;
+}
+
+.search-input-field {
+    width: 100%;
+}

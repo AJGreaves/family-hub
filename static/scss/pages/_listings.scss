@@ -1,0 +1,121 @@
+/* ------------------------------
+    Listing pages
+------------------------------ */
+
+#preview-bar,
+#publish-success {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+#preview-bar {
+    background-color: #ed6b5abb;
+    color: #fff;
+}
+
+#publish-success {
+    background-color: $light-blue;
+    color: $dark-blue;
+    padding-top: 1rem;
+    -webkit-transition: all 0.3s ease-in-out 0.3s;
+    transition: all 0.3s ease-in-out 0.3s;
+}
+
+#preview-bar h1 {
+    margin: 0;
+    font-family: $capitalized-heading;
+    font-size: 2rem;
+    color: #fff;
+}
+
+#preview-bar p {
+    margin: 0;
+}
+
+#listing-contact-links a{
+    color: $mid-blue;
+}
+
+#listing-contact-links a:hover{
+    color: $mid-blue-hover;
+}
+
+.hidden {
+    display: none;
+}
+
+#closeNotice {
+    float: right;
+    margin-top: -3rem;
+}
+
+
+.listing-img {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    /* CREDIT: Code for box shadow taken from https://codepen.io/sdthornton/pen/wBZdXq */
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+li {
+    list-style: none;
+}
+
+ul {
+    padding: 0;
+}
+
+#activity-listing-wrapper h3 {
+    font-family: $main-text;
+    font-size: 1.1rem;
+    color: $terracotta;
+    text-transform: uppercase;
+}
+
+#social-share-icons i.fa-thumbs-up {
+    font-size: 1.1rem;
+    color: $terracotta;
+}
+
+#listing-details p {
+    margin-bottom: 0.5rem;
+}
+
+#listing-details li,
+#listing-contact-links li {
+    margin-bottom: 0.3rem;
+}
+
+#listing-contact-links h5 {
+    font-family: $capitalized-heading;
+    font-size: 1.2rem;
+    color: $dark-blue;
+}
+
+#listing-contact-links i {
+    font-size: 1.2rem;
+}
+
+#listing-business-social-links li,
+#social-share-icons li,
+#social-share-icons h3 {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+#social-share-icons ul {
+    margin-top: 1rem;
+}
+
+table {
+    margin-bottom: 1rem;
+}
+
+td {
+    padding-right: 0.5rem;
+}

@@ -7,3 +7,10 @@ __pycache__/
 node_modules/
 .github/
 cloudinary_python.txt
+
+.venv
+.vscode
+__pycache__
+
+sample.txt
+.flaskenv

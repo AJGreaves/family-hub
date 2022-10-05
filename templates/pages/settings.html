@@ -1,0 +1,57 @@
+{% extends 'layout/base.html' %} {% block content %}
+
+<main class="content no-fouc">
+    <!-- Section: Account settings -->
+    <section>
+
+        <div id="account-settings-wrapper" class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Edit account</h1>
+                    <hr>
+                </div>
+            </div>
+            <div id="edit-account-form" class="row justify-content-center">
+                <div class="col-10 col-sm-8 col-md-5 col-xl-4 card familyhub-card p-4 m-2">
+                    <form id="emailEdit" method="POST">
+                        <h3>Change email</h3>
+                        <p>To update your email address please fill in both fields</p>
+                        <div class="form-group">
+                            <label for="emaiOld">Current email</label>
+                            <input name="emaiOld" type="email" class="form-control email-input-js" id="emaiOld"
+                                placeholder="Current email" required>
+                            <label for="emaiNew">New email</label>
+                            <input name="emaiNew" type="email" class="form-control email-input-js" id="emaiNew"
+                                placeholder="New email" required>
+                            </label>
+                            <button id="emailEditBtn" type="submit" class="btn btn-search edit-account-forms-js">Update email</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 d-md-none">
+                    <hr>
+                </div>
+                    
+                <div class="col-10 col-sm-8 col-md-5 col-xl-4 card familyhub-card p-4 m-2">
+                    <form id="passEdit" action="POST">
+                        <h3>Change password</h3>
+                        <p>To update your password please fill in both fields</p>
+                        <div class="form-group">
+                            <label for="passOld">Current password</label>
+                            <input name="passOld" type="password" class="form-control password-input-js"
+                                autocomplete="new-password" id="passOld" placeholder="Current password" required>
+                            <label for="passNew">New password</label>
+                            <input name="passNew" type="password" class="form-control password-input-js"
+                                autocomplete="new-password" id="passNew" placeholder="New password" required>
+                        </div>
+                        <button id="passEditBtn" type="submit" class="btn btn-search edit-account-forms-js">Update password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+{% endblock %}

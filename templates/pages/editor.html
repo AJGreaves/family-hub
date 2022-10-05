@@ -1,0 +1,596 @@
+{% extends 'layout/base.html' %} {% block content %}
+
+<main class="content no-fouc">
+    <!-- Section: editor for activities -->
+    <section>
+
+        <div id="add-edit-activity-wrapper" class="container">
+            <div class="row p-2 justify-content-center">
+                <form id="editorForm" method=POST>
+                    <div class="col-12">
+                        <h1>
+                            {% if editor == 'new' %}Add New
+                            {% elif editor == 'edit' %}Edit
+                            {% endif %}
+                        </h1>
+                        <hr>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <h3>Title</h3>
+                                <input id="title" name="title" class="form-control full-width" type="text"
+                                    maxlength="50" placeholder="Title for your listing on Family Hub"
+                                    value="{% if editor == 'edit' %}{{activity.title}}{% endif %}" required>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-row">
+                            <div class="form-group mb-0 col-12">
+                                <h3>Location</h3>
+                            </div>
+                            <div class="form-group col-12 col-md-4">
+                                <label for="addressLine1">Address line 1 *</label>
+                                <input id="addressLine1" name="addressLine1" class="form-control" type="text" maxlength="50" aria-label="input street name and number (required)"
+                                    {% if editor == 'edit' %}value="{{activity.address.addressLine1}}" {% endif %}
+                                    placeholder="Street name and number" required>
+                            </div>
+                            <div class="form-group col-12 col-md-4">
+                                <label for="postcode">Postcode *</label>
+                                <input id="postcode" name="postcode" class="form-control" type="text" maxlength="7" aria-label="input postcode (required)"
+                                    {% if editor == 'edit' %}value="{{activity.address.postcode}}" {% endif %} placeholder="Postcode" required>
+                            </div>
+                            <div class="form-group col-12 col-md-4">
+                                <!-- dropdown needed for creating/editing listings -->
+                                <label for="town">Town / City</label>
+                                <select id="town" name="town" class="form-control" required>
+                                    <option value="" disabled>Select</option>
+                                    <option value="Aalsmeer" {% if editor == 'edit' and activity.address.town == 'Aalsmeer' %}selected
+                                        {% endif %}>Aalsmeer</option>
+                                    <option value="Badhoevedorp" {% if editor == 'edit' and activity.address.town == 'Badhoevedorp' %}selected
+                                        {% endif %}>
+                                        Badhoevedorp</option>
+                                    <option value="Bloemendaal" {% if editor == 'edit' and activity.address.town == 'Bloemendaal' %}selected
+                                        {% endif %}>Bloemendaal</option>
+                                    <option value="Cruquius" {% if editor == 'edit' and activity.address.town == 'Cruquius' %}selected
+                                        {% endif %}>Cruquius</option>
+                                    <option value="Haarlem" {% if editor == 'edit' and activity.address.town == 'Haarlem' %}selected
+                                        {% endif %}>Haarlem</option>
+                                    <option value="Heemstede" {% if editor == 'edit' and activity.address.town == 'Heemstede' %}selected
+                                        {% endif %}>Heemstede</option>
+                                    <option value="Hillegom" {% if editor == 'edit' and activity.address.town == 'Hillegom' %}selected
+                                        {% endif %}>Hillegom</option>
+                                    <option value="Hoofddorp" {% if editor == 'edit' and activity.address.town == 'Hoofddorp' %}selected
+                                        {% endif %}>Hoofddorp</option>
+                                    <option value="Lisse" {% if editor == 'edit' and activity.address.town == 'Lisse' %}selected {% endif %}>
+                                        Lisse</option>
+                                    <option value="Nieuw-Vennep" {% if editor == 'edit' and activity.address.town == 'Nieuw-Vennep' %}selected
+                                        {% endif %}>
+                                        Nieuw-Vennep</option>
+                                    <option value="Santpoort-Noord" 
+                                        {% if editor == 'edit' and activity.address.town == 'Santpoort-Noord' %}selected {% endif %}>
+                                        Santpoort-Noord</option>
+                                    <option value="Uithorn" {% if editor == 'edit' and activity.address.town == 'Uithorn' %}selected
+                                        {% endif %}>Uithorn</option>
+                                    <option value="Zandvoort" {% if editor == 'edit' and activity.address.town == 'Zandvoort' %}selected
+                                        {% endif %}>Zandvoort</option>
+                                </select>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-6 pr-md-3">
+                                <h3>Contact info</h3>
+                                <label for="phone">Phone number</label>
+                                <input id="phone" name="phone" class="form-control" type="tel" pattern="[0-9]{10}" maxlength="100" placeholder="Phone number" aria-label="Input phone number (optional)"
+                                {% if editor == 'edit' %}value="{{activity.contact.phone}}" {% endif %}>
+                                <label for="email" class="mt-3">Email address *</label>
+                                <input id="email" name="email" class="form-control" type="email" maxlength="100" placeholder="Email" aria-label="Input email address (required)"
+                                {% if editor == 'edit' %}value="{{activity.contact.email}}" {% endif %} required>
+                                <label for="url" class="mt-3">Website url *</label>
+                                <input id="url" name="url" class="form-control" type="url" maxlength="100" placeholder="https://..." aria-label="Input website link including https (required)"
+                                {% if editor == 'edit' %}value="{{url}}" {% endif %} required>
+                            </div>
+                            <div class="form-group col-12 col-md-6 pl-md-3">
+                                <h3>Social links</h3>
+                                <label for="facebook">Facebook url</label>
+                                <input id="facebook" name="facebook" class="form-control" type="url" maxlength="100" placeholder="https://..." aria-label="Input facebook link including https (optional)"
+                                {% if editor == 'edit' and facebook %}value="{{facebook}}" {% endif %}>
+                                <label for="twitter" class="mt-3">Twitter url</label>
+                                <input id="twitter" name="twitter" class="form-control" type="url" maxlength="100" placeholder="https://..." aria-label="Input twitter link including https (optional)"
+                                {% if editor == 'edit' and twitter %}value="{{twitter}}" {% endif %}>
+                                <label for="instagram" class="mt-3">Instagram url</label>
+                                <input id="instagram" name="instagram" class="form-control" type="url" maxlength="100" placeholder="https://..." aria-label="Input instagram link including https (optional)"
+                                {% if editor == 'edit' and instagram %}value="{{instagram}}" {% endif %}>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                    <div class="col-12">
+                        <h3>Dates & Times</h3>
+                    </div>
+                    <div id="activityForm" class="col-12">
+                        <div class="form-row">
+                            <div id="timesInput" class="form-group col-12 col-md-7 col-lg-6">
+                                <!-- Monday times -->
+                                <div class="form-row">
+                                    <div class="form-group weekday-switch-row-top col-2">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input click-days-js" name="mon"
+                                                id="mon"
+                                                {% if editor == 'edit' and activity.days.mon %}checked{%  elif editor == 'new' %}
+                                                required{% endif %}>
+                                            <label class="custom-control-label" for="mon">Mon</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-5 mon-times">
+                                        <label>Start time </label>
+                                        <input id="monStart" class="compare-js compare-mon-js input-group date no-click"
+                                            name="monStart" {% if editor == 'edit' %} {% for time in openTimes %}
+                                            {% for key, value in time.items() %}
+                                            {% if key == 'monStart' and value != None %} value="{{ value }}"
+                                            {% elif key == 'monStart' and value == None %} disabled {% endif %}
+                                            {% endfor %} {% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                    <div class="form-group col-5 mon-times">
+                                        <label>End Time </label>
+                                        <input id="monEnd" class="compare-js compare-mon-js input-group date no-click"
+                                            name="monEnd" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'monEnd' and value != None %} value="{{ value }}"
+                                            {% elif key == 'monEnd' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                </div>
+
+                                <!-- Tuesday times -->
+                                <div class="form-row">
+                                    <div class="form-group weekday-switch-row col-2">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input click-days-js" name="tue"
+                                                id="tue"
+                                                {% if editor == 'edit' and activity.days.tue %}checked{%  elif editor == 'new' %}
+                                                required{% endif %}>
+                                            <label class="custom-control-label" for="tue">Tue</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-5 tue-times">
+                                        <input id="tueStart" class="compare-js compare-tue-js compare input-group date no-click"
+                                            name="tueStart" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'tueStart' and value != None %} value="{{ value }}"
+                                            {% elif key == 'tueStart' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                    <div class="form-group col-5 tue-times">
+                                        <input id="tueEnd" class="compare-js compare-tue-js compare input-group date no-click"
+                                            name="tueEnd" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'tueEnd' and value != None %} value="{{ value }}"
+                                            {% elif key == 'tueEnd' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                </div>
+
+                                <!-- Wednesday times -->
+                                <div class="form-row">
+                                    <div class="form-group weekday-switch-row col-2">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input click-days-js" name="wed"
+                                                id="wed"
+                                                {% if editor == 'edit' and activity.days.wed %}checked{%  elif editor == 'new' %}
+                                                required{% endif %}>
+                                            <label class="custom-control-label" for="wed">Wed</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-5 wed-times">
+                                        <input id="wedStart" class="compare-js compare-wed-js input-group date no-click"
+                                            name="wedStart" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'wedStart' and value != None %} value="{{ value }}"
+                                            {% elif key == 'wedStart' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                    <div class="form-group col-5 wed-times">
+                                        <input id="wedEnd" class="compare-js compare-wed-js input-group date no-click"
+                                            name="wedEnd" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'wedEnd' and value != None %} value="{{ value }}"
+                                            {% elif key == 'wedEnd' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                </div>
+
+                                <!-- Thursday times -->
+                                <div class="form-row">
+                                    <div class="form-group weekday-switch-row col-2">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input click-days-js" name="thu"
+                                                id="thu"
+                                                {% if editor == 'edit' and activity.days.thu %}checked{%  elif editor == 'new' %}
+                                                required{% endif %}>
+                                            <label class="custom-control-label" for="thu">Thu</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-5 thu-times">
+                                        <input id="thuStart" class="compare-js compare-thu-js input-group date no-click"
+                                            name="thuStart" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'thuStart' and value != None %} value="{{ value }}"
+                                            {% elif key == 'thuStart' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                    <div class="form-group col-5 thu-times">
+                                        <input id="thuEnd" class="compare-js compare-thu-js input-group date no-click"
+                                            name="thuEnd" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'thuEnd' and value != None %} value="{{ value }}"
+                                            {% elif key == 'thuEnd' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                </div>
+
+                                <!-- Friday times -->
+                                <div class="form-row">
+                                    <div class="form-group weekday-switch-row col-2">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input click-days-js" name="fri"
+                                                id="fri"
+                                                {% if editor == 'edit' and activity.days.fri %}checked{%  elif editor == 'new' %}
+                                                required{% endif %}>
+                                            <label class="custom-control-label" for="fri">Fri</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-5 fri-times">
+                                        <input id="friStart" class="compare-js compare-fri-js input-group date no-click"
+                                            name="friStart" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'friStart' and value != None %} value="{{ value }}"
+                                            {% elif key == 'friStart' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                    <div class="form-group col-5 fri-times">
+                                        <input id="friEnd" class="compare-js compare-fri-js input-group date no-click"
+                                            name="friEnd" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'friEnd' and value != None %} value="{{ value }}"
+                                            {% elif key == 'friEnd' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                </div>
+
+                                <!-- Saturday times -->
+                                <div class="form-row">
+                                    <div class="form-group weekday-switch-row col-2">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input click-days-js" name="sat"
+                                                id="sat"
+                                                {% if editor == 'edit' and activity.days.sat %}checked{%  elif editor == 'new' %}
+                                                required{% endif %}>
+                                            <label class="custom-control-label" for="sat">Sat</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-5 sat-times">
+                                        <input id="satStart" class="compare-js compare-sat-js input-group date no-click"
+                                            name="satStart" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'satStart' and value != None %} value="{{ value }}"
+                                            {% elif key == 'satStart' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                    <div class="form-group col-5 sat-times">
+                                        <input id="satEnd" class="compare-js compare-sat-js input-group date no-click"
+                                            name="satEnd" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'satEnd' and value != None %} value="{{ value }}"
+                                            {% elif key == 'satEnd' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                </div>
+
+                                <!-- Sunday times -->
+                                <div class="form-row">
+                                    <div class="form-group weekday-switch-row col-2">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input click-days-js" name="sun"
+                                                id="sun"
+                                                {% if editor == 'edit' and activity.days.sun %}checked{%  elif editor == 'new' %}
+                                                required{% endif %}>
+                                            <label class="custom-control-label" for="sun">Sun</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-5 sun-times">
+                                        <input id="sunStart" class="compare-js compare-sun-js input-group date no-click"
+                                            name="sunStart" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'sunStart' and value != None %} value="{{ value }}"
+                                            {% elif key == 'sunStart' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                    <div class="form-group col-5 sun-times">
+                                        <input id="sunEnd" class="compare-js compare-sun-js input-group date no-click"
+                                            name="sunEnd" {% if editor == 'edit' %}
+                                            {% for time in openTimes %}{% for key, value in time.items() %}
+                                            {% if key == 'sunEnd' and value != None %} value="{{ value }}"
+                                            {% elif key == 'sunEnd' and value == None %} disabled{% endif %}
+                                            {% endfor %}{% endfor %} {% else %} disabled {% endif %}>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-12 col-md-5 col-lg-6 pl-md-3">
+                                <div class="form-row">
+                                    <div class="form-group col-6 col-md-12 col-lg-6">
+                                        <label>Start Date:</label>
+                                        <input id="start" name="start"
+                                            class="input-group compare-js compare-date-js date datepicker-wider"
+                                            data-date-format="dd-mm-yyyy"
+                                            {% if editor == 'edit' and startDate != None %}value="{{startDate}}"
+                                            required {% elif editor == 'edit' and startDate == None %} disabled
+                                            {% else %} required{% endif %}>
+                                        <span class="input-group-addon"><i
+                                                class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                    <div class="form-group col-6 col-md-12 col-lg-6">
+                                        <label>End Date:</label>
+                                        <input id="end" name="end"
+                                            class="input-group compare-js compare-date-js date datepicker-wider"
+                                            data-date-format="dd-mm-yyyy"
+                                            {% if editor == 'edit' and endDate != None %}value="{{endDate}}" required
+                                            {% elif editor == 'edit' and endDate == None %} disabled {% else %}
+                                            required{% endif %}>
+                                        <span class="input-group-addon"><i
+                                                class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <div id="noDatesSwitch" class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input click-dates-js"
+                                                name="ongoing" id="ongoing"
+                                                {% if editor == 'edit' and activity.dates.ongoing %}checked{% endif %}>
+                                            <label class="custom-control-label" for="ongoing">Ongoing</label>
+                                            <small>(no start/end date)</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group school-holidays col-12 px-2">
+                                        <h3>Are you open during the school holidays?</h3>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="spring" name="spring"
+                                                {% if editor == 'edit' and activity.holidays and activity.holidays.spring %}checked{% endif %}>
+                                            <label class="form-check-label" for="spring">
+                                                Spring vacation
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="summer" name="summer"
+                                                {% if editor == 'edit' and activity.holidays and activity.holidays.summer %}checked{% endif %}>
+                                            <label class="form-check-label" for="summer">
+                                                Summer vacation
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="autumn" name="autumn"
+                                                {% if editor == 'edit' and activity.holidays and activity.holidays.autumn %}checked{% endif %}>
+                                            <label class="form-check-label" for="autumn">
+                                                Autumn vacation
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="christmas" name="christmas"
+                                                {% if editor == 'edit' and activity.holidays and activity.holidays.christmas %}checked{% endif %}>
+                                            <label class="form-check-label" for="christmas">
+                                                Christmas vacation
+                                            </label>
+                                        </div>
+                                        <small>Select any that apply</small>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- holiday opening times -->
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <hr>
+                    </div>
+
+                    <div class="col-12">
+
+                        <div class="form-row">
+                            <!-- Categories -->
+                            <div class="form-group categories col-12 col-md-4 px-2">
+                                <h3>Categories *</h3>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox"  id="sports" name="sports" aria-label="sports"
+                                    {% if editor == 'edit' and activity.categories.sports %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="sports">
+                                    Sports
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="swimming" name="swimming" aria-label="swimming"
+                                    {% if editor == 'edit' and activity.categories.swimming %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="swimming">
+                                    Swimming
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="creative" name="creative" aria-label="creative"
+                                    {% if editor == 'edit' and activity.categories.creative %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="creative">
+                                    Creative
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="scienceTech" name="scienceTech" aria-label="Science & Tech"
+                                    {% if editor == 'edit' and activity.categories.scienceTech %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="scienceTech">
+                                    Science & Tech
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="cultureMusic" name="cultureMusic" aria-label="Cultural & Music"
+                                    {% if editor == 'edit' and activity.categories.cultureMusic %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="cultureMusic">
+                                    Cultural & Music
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="dramaDance" name="dramaDance" aria-label="Drama & Dance"
+                                    {% if editor == 'edit' and activity.categories.dramaDance %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="dramaDance">
+                                    Drama & Dance
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="yogaMindfulness" name="yogaMindfulness" aria-label="Yoga & Mindfulnes"
+                                    {% if editor == 'edit' and activity.categories.yogaMindfulness %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="yogaMindfulness">
+                                    Yoga & Mindfulnes
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="museumsExhibitions" name="museumsExhibitions" aria-label="Museums & Exhibitions"
+                                    {% if editor == 'edit' and activity.categories.museumsExhibitions %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="museumsExhibitions">
+                                    Museums & Exhibitions
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="parksPlaygrounds" name="parksPlaygrounds" aria-label="Parks & playgrounds"
+                                    {% if editor == 'edit' and activity.categories.parksPlaygrounds %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="parksPlaygrounds">
+                                    Parks & playgrounds
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="nature" name="nature" aria-label="Nature"
+                                    {% if editor == 'edit' and activity.categories.nature %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="nature">
+                                    Nature
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="animals" name="animals" aria-label="Animals"
+                                    {% if editor == 'edit' and activity.categories.animals %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="animals">
+                                    Animals
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="clubs" name="clubs" aria-label="Clubs"
+                                    {% if editor == 'edit' and activity.categories.clubs %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="clubs">
+                                    Clubs
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="parties" name="parties" aria-label="Kids Parties"
+                                    {% if editor == 'edit' and activity.categories.parties %}checked
+                                    {% elif editor == 'new' %}required{% endif %}>
+                                    <label class="form-check-label" for="parties">
+                                    Kids Parties
+                                    </label>
+                                </div>
+                                <small>Select at least one</small>
+                            </div>
+                            <div class="form-group col-12 col-md-4 px-2">
+                                <h3>Age range *</h3>
+                                {% include 'components/forms/age_range.html' %}
+                                <small>Select at least one</small>
+                                
+                                <!-- heading outside partial because needs margin top in this form but not in another the partial is used in-->
+                                <h3 class="mt-3">indoor / outdoor *</h3>
+                                {% include 'components/forms/in_out_checkboxes.html' %}
+                                <small>Select all that apply</small>
+                            </div>
+                            <div class="form-group col-12 col-md-4 px-2">
+                                <h3>Other details</h3>
+                                {% include 'components/forms/other_details.html' %}
+                                <small>Select all that apply</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <hr>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <h3>Image for listing *</h3>
+                            <p>Please upload the photo for your listing to a free image hosting site
+                                (we recommend <a href="https://imgbb.com/" target="_blank" aria-label="ImgBB">ImgBB</a>)
+                                and paste the
+                                direct url for it here.</p>
+                            <input id="imgUrl" name="imgUrl" class="form-control" type="url" maxlength="200"
+                                {% if editor == 'edit' %}value="{{ imgUrl }}" {% endif %}
+                                placeholder="https://..." required>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <h3>Description</h3>
+                            <textarea class="form-control" id="description" rows="11" name="description" maxlength="2000"
+                                placeholder="The first sentence of this description will also appear with your listing in Family Hub search."
+                                required>{% if editor == 'edit' %}{{ activity.description }}{% endif %}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr>
+                    </div>
+
+                    <!-- margins line button edge up with filed above it -->
+                    <button id="editorSubmitBtn" class="btn btn-search ml-4 submit-js" type="submit">Preview</button>
+                    {% if editor == 'edit' %}
+                    <button id="{{activity['_id']}}" type="button"
+                        class="btn btn-delete delete-button ml-3">Delete</button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+{% endblock %}

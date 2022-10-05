@@ -1,0 +1,206 @@
+{% extends 'layout/base.html' %} {% block content %}
+<div class="content no-fouc">
+
+    <div id="filter-nav">
+        <div id="filter-frame">
+            <a href="javascript:void(0)" id="closeFiltersBtn" class="closeFiltersBtn d-md-none">&times;</a>
+            <form id="activity-filters">
+
+                <!-- Location Options -->
+                <label for="townSelect">Location</label>
+                <select id="townSelect" name="townSelect"
+                    class="form-control townSelect custom-select custom-select-sm">
+                    <option value="all" selected>All</option>
+                    <option value="Aalsmeer">Aalsmeer</option>
+                    <option value="Badhoevedorp">Badhoevedorp</option>
+                    <option value="Bloemendaal">Bloemendaal</option>
+                    <option value="Cruquius">Cruquius</option>
+                    <option value="Haarlem">Haarlem</option>
+                    <option value="Heemstede">Heemstede</option>
+                    <option value="Hillegom">Hillegom</option>
+                    <option value="Hoofddorp">Hoofddorp</option>
+                    <option value="Lisse">Lisse</option>
+                    <option value="Nieuw-Vennep">Nieuw-Vennep</option>
+                    <option value="Santpoort-Noord">Santpoort-Noord</option>
+                    <option value="Uithorn">Uithorn</option>
+                    <option value="Zandvoort">Zandvoort</option>
+                </select>
+
+                <!-- Category Options -->
+                <label for="categorySelect" class="pt-2">Category</label>
+                <select id="categorySelect" name="categories" class="form-control custom-select custom-select-sm">
+                    <option value="all" selected>All</option>
+                    <option value="sports">Sports</option>
+                    <option value="swimming">Swimming</option>
+                    <option value="creative">Creative</option>
+                    <option value="scienceTech">Science & Tech</option>
+                    <option value="cultureMusic">Cultural & Music </option>
+                    <option value="dramaDance">Drama & Dance </option>
+                    <option value="yogaMindfulness">Yoga & Mindfulness </option>
+                    <option value="museumsExhibitions">Museums & Exhibitions </option>
+                    <option value="parksPlaygrounds">Parks & playgrounds </option>
+                    <option value="playgroups">Playgroups</option>
+                    <option value="nature">Nature</option>
+                    <option value="animals">Animals</option>
+                    <option value="clubs">Clubs</option>
+                    <option value="parties">Kids Parties</option>
+                </select>
+
+                <!-- Days Options -->
+                <label for="daysFilter" class="pt-2">Days of the week</label>
+                <select id="daysFilter" name="daysFilter" class="form-control custom-select custom-select-sm">
+                    <option value="any" selected>Any</option>
+                    <option value="mon">Monday</option>
+                    <option value="tue">Tuesday</option>
+                    <option value="wed">Wednesday</option>
+                    <option value="thu">Thursday</option>
+                    <option value="fri">Friday</option>
+                    <option value="sat">Saturday</option>
+                    <option value="sun">Sunday</option>
+                    <option value="weekend">Weekend</option>
+                    <option value="weekdays">Weekday</option>
+                </select>
+
+                <!-- In / Out Options -->
+                <label for="inOutFilter" class="pt-2">Indoor or Outdoor</label>
+                <select id="inOutFilter" name="inOutFilter" class="form-control custom-select custom-select-sm">
+                    <option value="either" selected>Either</option>
+                    <option value="indoor">Indoor</option>
+                    <option value="outdoor">Outdoor</option>
+                    <option value="both">Both</option>
+                </select>
+
+                <!-- Age Range Options -->
+                <label class="pt-2">Age range</label>
+                <div class="form-row m-0 p-0">
+                    <div class="form-group col-6 m-0 p-0">
+                        <div class="form-check">
+                            <input class="form-check-input age-range-js" name="under4" type="checkbox" id="under4">
+                            <label class="form-check-label" for="under4">
+                                Under 4 yrs
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input age-range-js" name="age4to6" type="checkbox" id="age4to6">
+                            <label class="form-check-label" for="age4to6">
+                                4 - 6 yrs
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input age-range-js" name="age6to8" type="checkbox" id="age6to8">
+                            <label class="form-check-label" for="age6to8">
+                                6 - 8 yrs
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-6 m-0 p-0">
+                        <div class="form-check">
+                            <input class="form-check-input age-range-js" name="age8to10" type="checkbox" id="age8to10">
+                            <label class="form-check-label" for="age8to10">
+                                8 - 10 yrs
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input age-range-js" name="age10to12" type="checkbox"
+                                id="age10to12">
+                            <label class="form-check-label" for="age10to12">
+                                10 - 12 yrs
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input age-range-js" name="age12up" type="checkbox" id="age12up">
+                            <label class="form-check-label" for="age12up">
+                                12 yrs +
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Days Options -->
+                <label class="pt-2">Other details</label>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input in-out-js" name="free" type="checkbox" id="free">
+                        <label class="form-check-label" for="free">
+                            Free entrance
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input in-out-js" name="bringFood" type="checkbox" id="bringFood">
+                        <label class="form-check-label" for="bringFood">
+                            Bringing own food permitted
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input in-out-js" name="catering" type="checkbox" id="catering">
+                        <label class="form-check-label" for="catering">
+                            Catering available
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input in-out-js" name="goodWeather" type="checkbox" id="goodWeather">
+                        <label class="form-check-label" for="goodWeather">
+                            Suitable for good weather
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input in-out-js" name="badWeather" type="checkbox" id="badWeather">
+                        <label class="form-check-label" for="badWeather">
+                            Suitable for bad weather
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input in-out-js" name="groups" type="checkbox" id="groups">
+                        <label class="form-check-label" for="groups">
+                            Suitable for groups
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-create mb-3 mr-2 closeFiltersBtn d-md-none">Close</button>
+                <button type="button" class="btn btn-search clear-filters mb-3">Clear filters</button>
+            </form>
+        </div>
+    </div>
+
+    <main class="filters-shrink">
+
+        <!-- Section: activities -->
+        <section>
+
+            <div id="activities-page-wrapper" class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Activities</h1>
+                        <hr>
+                    </div>
+
+                    <!--START: Activities search results -->
+                    <div id="activity-results" class="col-12">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 id="num-of-results" class="float-left py-3"></h4>
+                                <button id="openFiltersBtn"
+                                    class="btn btn-create float-right filters-btn d-md-none mt-2">Open
+                                    filters</button>
+                            </div>
+                        </div>
+
+                        <!-- hook for javascript to display search results -->
+                        <div id="searchResults" class="row mx-3 mx-sm-1"></div>
+
+                        <!-- hook for javascript to display pagination links -->
+                        <div id="pagination-js"></div>
+
+                    </div>
+                    <!--END: Activities search results -->
+
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+{% endblock %}

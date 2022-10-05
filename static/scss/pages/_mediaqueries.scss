@@ -1,0 +1,132 @@
+/* ------------------------------
+    Media Queries
+------------------------------ */
+
+/* small size screens and up */
+
+@media screen and (min-width: 576px) {
+    /* keeps search bar and search button in one line */
+    .search-input-field {
+        width: 75%;
+    }
+    #search-page-search-button {
+        /* keeps search bar and search button in one line */
+        margin-top: 0;
+    }
+    .card-img-wrapper.account-card {
+        height: 180px;
+    }
+    .card-title-wrapper {
+        height: 40px;
+    }
+    .card-text-wrapper {
+        height: 70px;
+    }
+    #holiday-feature-box {
+        border-radius: 15px;
+    }
+    .toptip-img {
+        border-radius: 15px 15px 0 0;
+    }
+}
+
+/* medium size screens and up */
+@media screen and (min-width: 768px) {
+    /* possible to see logo when activities filter on activties page */
+    .navbar-brand.activities-pg,
+    .navbar-collapse.activities-pg {
+        margin-left: 280px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+    h2 {
+        font-size: 2.2rem;
+    }
+
+    /* creates more space around carousel controls */
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 15%;
+    }
+    /* adds more spacing around floating button */
+    #to-top-btn {
+        right: 30px;
+        bottom: 30px;
+    }
+
+    #search-btn {
+        right: 30px;
+        bottom: 100px;
+    }
+    .search-input-field {
+        /* keeps search bar and search button in one line */
+        width: 80%;
+    }
+    
+    #errorPageColumn {
+        padding: 5rem 5rem;
+    }
+    #errorPageColumn h1,
+    #errorPageColumn h2 {
+        margin-top: auto;
+    }
+    #animation404 {
+        left: auto;
+        right: 0;
+        width: auto;
+    }
+    .card-img-wrapper.account-card {
+        height: 170px;
+    }
+    .toptip-image-wrapper {
+        height : auto;
+    }
+    .toptip-img {
+        border-radius: 15px 0 0 15px;
+    }
+    #filter-nav {
+        left: 0;
+    }
+    .filters-shrink {
+        margin-left: 275px;
+    }
+    .modal-content-box {
+        margin-top: 30vh;
+    }
+}
+
+/* large screens and up */
+
+@media screen and (min-width: 992px) {
+    /* positions nav list to the new margin next to filters bar */
+    .navbar-collapse.activities-pg {
+        margin-left: auto;
+    }
+    #backgroundImgPermission {
+        background-image: url('https://i.ibb.co/RYfs1R8/rock-on.jpg');
+        background-position: 90% 90%;
+    }
+    .card-img-wrapper.account-card {
+        min-height: 200px;
+    }
+    .card-text-wrapper {
+        height: 95px;
+    }
+    #activity-results .card-text-wrapper {
+        height: auto;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .card-img-wrapper.account-card {
+        height: 225px;
+    }
+    .card-text-wrapper {
+        height: 80px;
+    }
+    .card-text-wrapper p {
+        font-size: 0.85rem
+    }
+}

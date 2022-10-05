@@ -1,0 +1,187 @@
+{% extends 'layout/base.html' %} {% block content %}
+
+<main class="content no-fouc">
+    <!-- Section: activity listing -->
+    <section id="activity-listing-wrapper">
+        {% if preview == True %}
+        <!-- preview bar shows when user has created a new activity and have not yet chosen to publish it -->
+        <div id="preview-bar" class="pt-2">
+            <h1>Preview</h1>
+            <p>This is a preview of how your listing will look on Family Hub. It is not published yet.</p>
+            <strong>Click "Publish" button to confirm.</strong>
+        </div>
+        {% endif %}
+        {% if newActivity %}
+        <!-- publish success bar shows when user has just published their new activity -->
+        <div id="publish-success" class="hide mt-2">
+            <p class="hide">Your listing has been published!</p>
+            <i id="closeNotice" class="fas fa-times text-white fa-2x hide"></i>
+        </div>
+        {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>{{ activity.title }}</h1>
+                    <hr>
+                </div>
+                <!-- activity image -->
+                <div class="col-12 col-lg-6">
+                    <div class="activity-listing-image">
+                        <img class="listing-img" src="{{ activity.imgUrl }}" alt="{{activity.title}}"></img>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <!-- activity details -->
+                    <div id="listing-details" class="row">
+
+                        <!-- opening times table -->
+                        <div class="col-6">
+                            {% include 'components/listings/open_times.html' %}
+                        </div>
+
+                        <!-- dates and age groups -->
+                        <div class="col-6">
+
+                            {% if activity.dates.start %}
+                            <!-- dates table -->
+                            <h3><i class="far fa-calendar-alt icon"></i>Dates</h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            From:
+                                        </td>
+                                        <td>
+                                            {{ startDate }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            To:
+                                        </td>
+                                        <td>
+                                            {{ endDate }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {% endif %}
+
+                            <!-- ages table -->
+                            {% include 'components/listings/ages_table.html' %}
+
+                        </div>
+
+                        <!-- contact -->
+                        <div id="listing-contact-links" class="col-12 col-md-6">
+                            <a href="{{ map_url }}" target="_blank" rel="noopener" aria-label="click to go to this address in google maps">
+                                <h3><i class="fas fa-map-marker-alt icon"></i>Address</h3>
+                                <p>{{ activity.address.addressLine1 }}<br>
+                                    {{ activity.address.postcode }} {{ activity.address.town }}</p>
+                            </a>
+                        </div>
+
+                        <!-- social -->
+                        <div id="listing-business-social-links" class="col-12 col-md-6">
+                            {% if activity.contact.facebook or activity.contact.instagram or activity.contact.twitter  %}
+                            {% include 'components/listings/social.html' %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <h3 class="mt-3"><i class="far fa-chart-bar icon"></i>Category</h3>
+                    {% if activity.categories.sports %}<span class="category-list"><i class="fas fa-running"></i>
+                        Sports</span>{% endif %}
+                    {% if activity.categories.swimming %}<span class="category-list"><i class="fas fa-swimmer"></i>
+                        Swimming</span>{% endif %}
+                    {% if activity.categories.creative %}<span class="category-list"><i class="fas fa-palette"></i>
+                        Creative</span>{% endif %}
+                    {% if activity.categories.scienceTech %}<span class="category-list"><i class="fas fa-atom"></i>
+                        Science & Tech</span>{% endif %}
+                    {% if activity.categories.cultureMusic %}<span class="category-list"><i class="fas fa-guitar"></i>
+                        Cultural & Music</span>{% endif %}
+                    {% if activity.categories.dramaDance %}<span class="category-list"><i
+                            class="fas fa-theater-masks"></i> Drama & Dance</span>{% endif %}
+                    {% if activity.categories.yogaMindfulness %}<span class="category-list"><i class="fas fa-spa"></i>
+                        Yoga & Mindfulnes</span>{% endif %}
+                    {% if activity.categories.museumsExhibitions %}<span class="category-list"><i
+                            class="fas fa-ticket-alt"></i> Museums & Exhibitions</span>{% endif %}
+                    {% if activity.categories.parksPlaygrounds %}<span class="category-list"><i class="fas fa-tree"></i>
+                        Parks & playgrounds</span>{% endif %}
+                    {% if activity.categories.playgroups %}<span class="category-list"><i class="fas fa-cubes"></i>
+                        Playgroups</span>{% endif %}
+                    {% if activity.categories.nature %}<span class="category-list"><i class="fas fa-leaf"></i>
+                        Nature</span>{% endif %}
+                    {% if activity.categories.animals %}<span class="category-list"><i class="fas fa-paw"></i>
+                        Animals</span>{% endif %}
+                    {% if activity.categories.clubs %}<span class="category-list"><i class="fas fa-medal"></i>
+                        Clubs</span>{% endif %}
+                    {% if activity.categories.parties %}<span class="category-list"><i class="fas fa-birthday-cake"></i>
+                        Parties</span>{% endif %}
+                </div>
+                <div class="col-12">
+                    {% if activity.otherDetails %}
+                    <h3><i class="fas fa-info icon"></i>More info</h3>
+                    {% if activity.otherDetails.free %}<span class="category-list"><i class="fas fa-euro-sign"></i> Free
+                        entry</span>{% endif %}
+                    {% if activity.otherDetails.bringFood %}<span class="category-list"><i
+                            class="fas fa-bread-slice"></i> Bringing own food permitted</span>{% endif %}
+                    {% if activity.otherDetails.catering %}<span class="category-list"><i class="fas fa-utensils"></i>
+                        Catering available</span>{% endif %}
+                    {% if activity.otherDetails.goodWeather %}<span class="category-list"><i class="far fa-sun"></i>
+                        Suitable for good weather</span>{% endif %}
+                    {% if activity.otherDetails.badWeather %}<span class="category-list"><i
+                            class="fas fa-cloud-showers-heavy"></i> Suitable for bad weather</span>{% endif %}
+                    {% if activity.otherDetails.groups %}<span class="category-list"><i class="fas fa-users"></i>
+                        Suitable for groups</span>{% endif %}
+                    {% endif %}
+                </div>
+                <!-- listing description -->
+                <div class="col-12">
+                    <h3><i class="fas fa-align-left icon"></i>Description</h3>
+                    <p class="mb-0">{% for paragraph in description %}
+                        {% for key, value in paragraph.items() %}
+                        {{ value }}<br>
+                        {% endfor %}
+                        {% endfor %}</br>
+                </div>
+                <div class="col-12 mb-4">
+                    <a class="btn btn-search m-1" target="_blank" href="{{ activity.contact.url }}"
+                        aria-label="Visit the website for this listing {{ activity.contact.url }}" rel="noopener">Visit website</a>
+                    {% if activity.contact.phone %}
+                    <a class="btn btn-readmore m-1" href="tel:{{ activity.contact.phone }}"
+                        aria-label="Call the organisers of this listing">Tel: {{ activity.contact.phone }}</a>
+                    {% endif %}
+                    <div class="btn btn-create m-1" id="emailOrganisers"
+                        aria-label="Email the organisers of this listing"  data-toggle="modal" data-target="#emailActivityModal">Email organisers</div>
+                </div>
+
+                <!-- share this listing page on social media -->
+                {% include 'components/listings/share.html' %}
+
+
+                {% if preview == True %}
+                <!-- edit and publish buttons only available when user is previewing their new activity -->
+                <div class="col-12 col-md-6 text-center text-md-left">
+                    <a href="{{ url_for('edit_activity_page', username=session['user'], title=activity['title']|slugify, activity_id=activity['_id'])}}"
+                        class="heading-btn btn btn-create">Edit</a>
+                    <form method="POST" id="publish">
+                        <button id="publishActivity" type="submit"
+                            class="heading-btn btn btn-search ml-2">Publish</button>
+                    </form>
+                </div>
+                {% else %}
+                <!-- link back to activities page only available when not in preview mode -->
+                <div class="col-12 col-md-6 text-center text-md-right">
+                    <a href="{{url_for('activities_page')}}" class="btn btn-search mt-4">Search more
+                        activities</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </section>
+</main>
+{% endblock %}

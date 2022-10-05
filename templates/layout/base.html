@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Family activities and events for kids in Haarlemmermeer and Haarlem, in English">
+    <meta name="keywords" content="{{ keywords }}">
+    <meta name="author" content="Anna Greaves">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}" type="text/css">
+    {% if active == 'contact' %}
+    <!-- scripts for EmailJs to work with sending email contact form -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
+    {% endif %}
+    <title>{{headTitle}} | Family Hub</title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    {% include 'layout/nav.html' %}
+
+    <!-- Main content -->
+    {% block content %} {% endblock %}
+
+    <!-- Footer -->
+    {% include 'layout/footer.html' %}
+
+    <!-- Floating go to top button -->
+    <a href="#" id="to-top-btn" class="floating-btn" title="Go to top" aria-label="Return to the top of the page">
+        <i class="fas fa-chevron-circle-up fa-3x" aria-hidden="true"></i>
+    </a>
+
+    <!-- Delete warning modal -->
+    {% include 'components/modals/delete_warning_modal.html' %}
+
+    <!-- Alert modal -->
+    {% if active != "login" %}
+    {% include 'components/modals/alert.html' %}
+    {% endif %}
+    <!-- Contact business modal -->
+    {% if activity %}
+    {% include 'components/modals/email_activity.html' %}
+    {% endif %}
+    <!-- Spinner -->
+    <div id="spinner-wrapper">
+        <div id="spinner" Title="loading"></div>
+    </div>
+
+    <!-- Bootstrap scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Gijgo scripts for datepickers and timepickers scripts -->
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>
+
+    <!-- Project scripts, which loaded dependant on active page -->
+    <script src="{{url_for('static', filename='js/common.js')}}"></script>
+    {% if active == 'form' %}
+    <script src="{{url_for('static', filename='js/forms.js')}}"></script>
+    <script src="{{url_for('static', filename='js/date-time-pickers.js')}}"></script>
+    {% elif active == 'newAccount' or active == 'login' or active == 'contact' %}
+    <script src="{{url_for('static', filename='js/forms.js')}}"></script>
+    {% elif active == 'home' %}
+    <script src="{{url_for('static', filename='js/index.js')}}"></script>
+    {% elif active == 'activities' %}
+    <script src="{{url_for('static', filename='js/filters.js')}}"></script>
+    {% elif active == 'listing' %}
+    <script src="{{url_for('static', filename='js/listings.js')}}"></script>
+    {% endif %}
+    {% if active == 'contact' or active == 'listing' %}
+    <!-- script for email -->
+    <script src="{{url_for('static', filename='js/sendemail.js')}}"></script>
+    {% endif %}
+</body>
+
+</html>

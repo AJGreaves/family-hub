@@ -1,0 +1,257 @@
+/* ------------------------------
+    All pages
+------------------------------ */
+
+.no-fouc {
+    display: none;
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+#nav-logo {
+    width: 30px;
+    height: 30px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(0,0,0,.65);
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: rgba(0,0,0,.9);
+}
+
+.dropdown-menu {
+    color: rgba(0,0,0,.7)
+}
+
+.dropdown-divider {
+    border-top: 0.5px solid #bfbfbf;
+}
+
+/* !important needed here to override more specific heading colours in _listings.scss */
+a {
+    -webkit-transition: all 0.2s ease-in-out 0.2s;
+    transition: all 0.2s ease-in-out 0.2s;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+
+/* ------------------------------
+    Background colours
+------------------------------ */
+
+.bg-platinum {
+    background-color: $platinum;
+}
+
+/* ------------------------------
+    Containers
+------------------------------ */
+
+.container-fluid,
+.row {
+    padding: 0;
+}
+
+hr {
+    border-top: 2px solid $mid-blue;
+    opacity: 0.5;
+}
+
+footer hr {
+    border-top: 2px solid $platinum;
+    opacity: 0.5;
+}
+
+/* ------------------------------
+    Background images
+------------------------------ */
+
+.hero-img {
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.hero-home {
+    background-image: url("https://i.ibb.co/znXv12H/painthands.jpg");
+    background-position: center;
+}
+
+.hero-search {
+    background-image: url("https://i.ibb.co/y8bx9BL/kidswim.jpg");
+    background-position: center;
+}
+
+.hero-activities {
+    background-image: url("https://i.ibb.co/9VkHCkq/pumpkin.jpg");
+    background-position: center 20%;
+}
+
+#backgroundImgWrapper {
+    height: 100vh;
+    width: 100vw;
+}
+
+#texture {
+    background: url('../img/robot-background.jpg');
+    background-repeat: repeat;
+}
+
+#animation404 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+}
+
+#backgroundImgPermission {
+    background-image: url('https://i.ibb.co/K9gzGDV/rock-on-sm.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 100% 10%;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+/* positions text in the middle of the hero image, 
+shadow added to give depth and contrast with the image for readability */
+
+.hero-img-tagline {
+    font-family: $capitalized-heading;
+    color: #fff;
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.9);
+    position: absolute;
+    left: 0;
+    bottom: 5%;
+    width: 100%;
+}
+
+.about-pic-wrapper {
+    width: 100px;
+    height: 100px;
+    margin: 1rem;
+}
+
+.about-pic {
+    background-image: url("../img/anna.jpg");
+    background-size: cover;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* ---------------------------------
+    404 + permission denied pages
+--------------------------------- */
+
+#errorPageColumn {
+    padding: 2rem 2rem;
+}
+
+#errorPageColumn h1 {
+    margin-top: 0.5rem;
+}
+
+#errorPageColumn h2 {
+    font-family: $main-text;
+    color: $mid-blue-hover;
+    text-transform: none;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#errorPageColumn p {
+    font-size: 1.2rem;
+}
+
+/* ------------------------------
+    Account pages
+------------------------------ */
+
+#my-account-wrapper h2,
+#my-account-wrapper h1 {
+    /* Needed to make buttons in same column display correctly */
+    display: inline-block;
+}
+
+/* ------------------------------
+    Footer
+------------------------------ */
+
+/* CREDIT: code to fix footer to bottom of page even when there is not
+enough content to push it down taken from https://css-tricks.com/couple-takes-sticky-footer/ */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+
+.content {
+    margin-top: 3rem;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 0 auto;
+            flex: 1 0 auto;
+}
+
+footer {
+    background-color: $mid-blue-hover;
+    color: white;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+}
+
+
+footer p,
+footer a {
+    margin-bottom: 0.3rem;
+    color: $platinum;
+    display: block;
+}
+
+footer h4 {
+    margin-top: auto;
+}
+
+footer a {
+    color: $platinum;
+    -webkit-transition: all 0.5s ease-in-out 0.1s;
+    transition: all 0.5s ease-in-out 0.1s;
+}
+
+footer a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.copyright,
+.social-icons-footer {
+    margin-bottom: 2rem;
+}
+
+/* scroll behavior, adds smooth scrolling when 
+jumping to different parts of the same page */
+
+html {
+    scroll-behavior: smooth;
+}

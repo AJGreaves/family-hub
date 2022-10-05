@@ -1,0 +1,162 @@
+/* ------------------------------
+    Cards
+------------------------------ */
+
+.familyhub-card {
+    margin-bottom: 1rem;
+    /* CREDIT: Code for box shadow taken from https://codepen.io/sdthornton/pen/wBZdXq */
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    -webkit-transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.familyhub-card:hover {
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.familyhub-card-header {
+    padding: 0;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.familyhub-card-header-no-button {
+    padding: 0.7rem;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.filter-options {
+    color: $dark-blue;
+}
+
+#search-page-wrapper .familyhub-card {
+    margin-bottom: 2rem;
+}
+
+#my-account-wrapper .familyhub-card {
+    margin-top: 2.5rem;
+}
+
+.inactive {
+    opacity: 0.5;
+}
+
+p.expired {
+    color: $dark-blue;
+    font-size: 0.75rem;
+    display: inline-block;
+    margin-left: 0.25rem;
+}
+
+/* sets fixed height for card images, images set to cover 
+so they will all be the same dimensions even when original 
+images provided are different ones. Background image url applied
+inline as easiest way to import images with Jinja
+BUG FIX: !important necessary to override styles activated with
+the inline background style for the background image  */
+
+.card-img-wrapper {
+    height: 225px;
+    position: relative;
+}
+
+.card-img-wrapper.account-card {
+    height: 250px;
+    position: relative;
+}
+.card-picture {
+    /* background image property provided by inline style through jinja
+    check the two files in components/cards directory for these inline style */
+    background-size: cover!important;
+    background-position: center!important;
+    height: 100%;
+    border-radius: 0.25rem 0.25rem 0 0;
+}
+
+.card-title {
+    font-size: 1rem;
+    color: $mid-blue;
+}
+
+.card-text {
+    font-size: 0.85rem;
+    color: $dark-blue;
+}
+
+.card-title-wrapper {
+    height: 40px;
+}
+
+.card-text-wrapper {
+    height: 65px;
+}
+
+.location-text {
+    position: absolute; 
+    bottom: 0;
+    right: 0;
+    color: white;
+    font-family: $capitalized-heading;
+    background-color: $dark-blue;
+    padding: 0 10px;
+    margin: 5px;
+    font-size: 1.25rem;
+    opacity: 0.8;
+}
+
+
+#holiday-feature-box {
+    background-color: $mid-blue;
+}
+
+#holiday-feature-box h4 {
+    color: $blond;
+    font-family: $capitalized-heading;
+    font-size: 2rem;
+}
+
+#holiday-feature-box p {
+    color: #fff;
+}
+
+.toptip-image-wrapper {
+    position: relative;
+    height : 300px;
+}
+
+.toptip-img {
+    height: 100%;
+    background-size: cover!important;
+    background-position: center !important;
+}
+
+.readmore-link {
+    margin-top: 0.25rem;
+    color: $mid-blue;
+    -webkit-transition: 0.3s ease-in-out 0.3s;
+    transition: 0.3s ease-in-out 0.3s;
+}
+
+.readmore-link:hover {
+    color: $mid-blue-hover;
+}
+
+.toptip-content a {
+    color: #fff;
+    -webkit-transition: 0.3s ease-in-out 0.3s;
+    transition: 0.3s ease-in-out 0.3s;
+}
+
+.toptip-content a:hover {
+    color: $blond;
+}
+
+#activity-results .col-12.col-sm-6.col-lg-4 {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+#activity-results .card-body {
+    padding: 0.5rem;
+}

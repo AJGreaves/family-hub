@@ -1,0 +1,52 @@
+{% extends 'layout/base.html' %} {% block content %}
+
+<main class="content no-fouc">
+    <!-- Section: Create an account -->
+    <section>
+
+        <div id="create-account-wrapper" class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Create an account</h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-11 col-md-6 col-lg-5 col-xl-4 card familyhub-card p-4">
+                    <h3>Create an account to post your listings to Family Hub</h3>
+                    <form id="new-account-form">
+                        <div class="form-group">
+                            <label for="newUsername">Username</label>
+                            <input id="newUsername" type="text" class="form-control" maxlength="40"
+                                aria-label="Enter a username" placeholder="Enter a username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newEmailInput">Email address</label>
+                            <input id="newEmailInput" type="email" class="form-control" maxlength="40"
+                                aria-describedby="emailHelp" placeholder="Enter email" required>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPasswordInput">Password</label>
+                            <input id="newPasswordInput" type="password" class="form-control" maxlength="20" minlength="8"
+                                placeholder="Password" required>
+                        </div>
+                        <button id="newAccountSubmit" type="submit" class="btn btn-search">Create account</button>
+                    </form>
+                    <p class="mt-2">Already have an account? <a class="fh-link" href="{{url_for('login_page')}}">
+                            Log in</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- displays users data as json string 
+        <p>{% if users %} {{ users }} {% endif%}</p> -->
+
+    {% include 'components/modals/new_user_confirm_modal.html' %}
+    {% include 'components/modals/user_exists_modal.html' %}
+</main>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'layout/base.html' %} {% block content %}
+
+    <!-- Section: My account -->
+    <main class="content no-fouc">
+            {% if deleted == True %}
+            <!-- publish success bar shows when user has just published their new activity -->
+            <div id="publish-success" class="hide">
+                <p class="hide">Your listing has been successfully deleted!</p>
+                <i id="closeNotice" class="fas fa-times text-white fa-2x hide"></i>
+            </div>
+            {% endif %}
+
+        <div id="my-account-wrapper" class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>My account</h1>
+                    <a href="{{url_for('settings_page', username=session['user'])}}" aria-label="Account settings" 
+                    data-toggle="tooltip" data-placement="bottom" title="Account Settings" class="float-right">
+                        <i class="fas fa-cog account-cog heading-btn"></i>
+                    </a>
+                    <hr>
+                </div>
+            </div>
+
+            <!-- Section: My Activities -->
+            <div class="row">
+                <div class="col-12">
+                    <h2>My Listings</h2>
+                    <a href="{{url_for('new_activity_page', username=session['user'])}}" class="heading-btn btn btn-create float-right">Add New</a>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                {% if activities %}
+                {% for activity in activities %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    {% include 'components/cards/account_activity.html' %}
+                </div>
+                {% endfor %}
+                {% elif activities == [] %}
+                <div class="col-12 text-center">
+                    <p>You don't have any listings yet, click the "Add New" button above to make one!</p>
+                </div>
+                {% endif %}
+                
+            </div>
+
+        </div>
+
+
+    </main>
+{% endblock %}
